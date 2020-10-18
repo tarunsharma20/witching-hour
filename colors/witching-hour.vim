@@ -15,7 +15,7 @@ if exists("syntax_on")
 endif
 
 let colors_name = "witching-hour"
-"}}}
+" }}}
 
 " Palettes {{{
 let s:none            = ['NONE', 'NONE']
@@ -40,9 +40,23 @@ let s:color_3         = ['#19B3C4', '38']
 let s:color_4         = ['#c7d100', '184']
 let s:color_5         = ['#ff51f6', '207']
 let s:color_6         = ['#ffa822', '214']
-"}}}
+" }}}
 
-function! s:getHighlight(name, ...)
+let s:attrs = {
+  \ 'b': 'bold',
+  \ 'u': 'underline',
+  \ 'uc': 'undercurl',
+  \ 'r': 'reverse',
+  \ 'R': 'inverse',
+  \ 'i': 'italic',
+  \ 'so': 'standout',
+  \ 'n': 'NONE',
+  \ 'bu': 'bold,italic',
+  \ 'bui': 'bold,italic,underline',
+  \ 'ui': 'underline,italic',
+  \}
+
+function! s:HI(name, ...)
   let l:fg = get(a:, 1, s:none)
   let l:bg = get(a:, 2, s:none)
   let l:attrs = get(a:, 3, s:none)
@@ -63,87 +77,130 @@ function! s:getHighlight(name, ...)
   execute join(l:hl_string, ' ')
 endfunction
 
-" Generic {{{
-call s:getHighlight('Cursor', s:base_bg, s:base_fg)
-call s:getHighlight('iCursor', s:base_bg, s:faint)
-call s:getHighlight('CursorLine', s:none, s:base_bg_shade_1)
-call s:getHighlight('CursorColumn', s:none, s:base_bg_shade_1)
-call s:getHighlight('CursorLineNr', s:base_fg, s:base_bg_shade_1)
+" User interface {{{
+call s:HI('Normal', s:base_fg, s:base_bg)
 
-call s:getHighlight('Normal', s:base_fg, s:base_bg)
-call s:getHighlight('LineNr', s:comment, s:base_bg)
-call s:getHighlight('ColorColumn', s:none, s:base_bg_shade_2)
-call s:getHighlight('Directory', s:color_1)
-call s:getHighlight('VertSplit', s:faint)
-call s:getHighlight('Folded', s:faint, s:base_bg)
-call s:getHighlight('FoldColumn', s:hidden, s:base_bg)
-call s:getHighlight('SignColumn', s:none, s:base_bg)
-call s:getHighlight('IncSearch', s:base_bg, s:color_1)
-call s:getHighlight('NonText', s:hidden)
-call s:getHighlight('SpecialKey', s:hidden)
-call s:getHighlight('Search', s:base_bg, s:color_6)
-call s:getHighlight('StatusLine', s:base_bg, s:base_fg)
-call s:getHighlight('StatusLineNC', s:base_fg, s:hidden)
-call s:getHighlight('Visual', s:base_bg, s:color_3)
-call s:getHighlight('EndOfBuffer', s:hidden, s:base_bg)
-call s:getHighlight('Comment', s:comment, s:base_bg, ['italic', 'italic'])
+call s:HI('Cursor', s:base_bg, s:base_fg)
+call s:HI('iCursor', s:base_bg, s:faint)
+call s:HI('CursorLine', s:none, s:base_bg_shade_1)
+call s:HI('CursorColumn', s:none, s:base_bg_shade_1)
+call s:HI('CursorLineNr', s:base_fg, s:base_bg_shade_1)
 
-call s:getHighlight('Question', s:base_fg)
-call s:getHighlight('ModeMsg', s:base_fg)
-call s:getHighlight('ErrorMsg', s:danger, s:base_bg)
-call s:getHighlight('WarningMsg', s:warning, s:base_bg)
+call s:HI('LineNr', s:comment, s:base_bg)
+call s:HI('ColorColumn', s:none, s:base_bg_shade_2)
+call s:HI('Directory', s:color_1)
+call s:HI('VertSplit', s:faint)
+call s:HI('Folded', s:faint, s:base_bg)
+call s:HI('FoldColumn', s:hidden, s:base_bg)
+call s:HI('SignColumn', s:none, s:base_bg)
+call s:HI('IncSearch', s:base_bg, s:color_1)
+call s:HI('NonText', s:hidden)
+call s:HI('SpecialKey', s:hidden)
+call s:HI('Search', s:base_bg, s:color_6)
+call s:HI('StatusLine', s:base_bg, s:base_fg)
+call s:HI('StatusLineNC', s:base_fg, s:hidden)
+call s:HI('Visual', s:base_bg, s:color_3)
+call s:HI('EndOfBuffer', s:hidden, s:base_bg)
+
+call s:HI('Question', s:base_fg)
+call s:HI('ModeMsg', s:base_fg)
+call s:HI('ErrorMsg', s:danger, s:base_bg)
+call s:HI('WarningMsg', s:warning, s:base_bg)
 
 if has('gui_running')
-  call s:getHighlight('SpellBad', s:base_fg, s:base_bg, ['undercurl', 'underline'], s:danger[0])
-  call s:getHighlight('SpellCap', s:base_fg, s:base_bg, ['undercurl', 'underline'], s:warning[0])
-  call s:getHighlight('SpellLocal', s:base_fg, s:base_bg, ['undercurl', 'underline'], s:warning[0])
-  call s:getHighlight('SpellRare', s:base_fg, s:base_bg, ['undercurl', 'underline'], s:warning[0])
-
+  call s:HI('SpellBad', s:none, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:danger[0])
+  call s:HI('SpellCap', s:none, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:warning[0])
+  call s:HI('SpellLocal', s:none, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:warning[0])
+  call s:HI('SpellRare', s:none, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:warning[0])
 else
-  call s:getHighlight('SpellBad', s:danger, s:base_bg, ['undercurl', 'underline'], s:danger[0])
-  call s:getHighlight('SpellCap', s:warning, s:base_bg, ['undercurl', 'underline'], s:warning[0])
-  call s:getHighlight('SpellLocal', s:warning, s:base_bg, ['undercurl', 'underline'], s:warning[0])
-  call s:getHighlight('SpellRare', s:warning, s:base_bg, ['undercurl', 'underline'], s:warning[0])
+  call s:HI('SpellBad', s:danger, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:danger[0])
+  call s:HI('SpellCap', s:warning, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:warning[0])
+  call s:HI('SpellLocal', s:warning, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:warning[0])
+  call s:HI('SpellRare', s:warning, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:warning[0])
 endif
 
+call s:HI('DiffAdd', s:base_bg, s:success)
+call s:HI('DiffChange', s:base_bg, s:warning)
+call s:HI('DiffDelete', s:base_bg, s:danger)
+call s:HI('DiffText', s:base_bg, s:success)
+call s:HI('diffAdded', s:success)
+call s:HI('diffRemoved', s:danger)
 
-call s:getHighlight('DiffAdd', s:base_bg, s:success)
-call s:getHighlight('DiffChange', s:base_bg, s:warning)
-call s:getHighlight('DiffDelete', s:base_bg, s:danger)
-call s:getHighlight('DiffText', s:base_bg, s:success)
-call s:getHighlight('diffAdded', s:success)
-call s:getHighlight('diffRemoved', s:danger)
+call s:HI('TabLine', s:base_bg, s:base_fg)
+call s:HI('TabLineFill', s:none, s:base_fg)
+call s:HI('TabLineSel', s:base_fg, s:base_bg)
 
-call s:getHighlight('TabLine', s:base_bg, s:base_fg)
-call s:getHighlight('TabLineFill', s:none, s:base_fg)
-call s:getHighlight('TabLineSel', s:base_fg, s:base_bg)
+call s:HI('PMenu', s:none, s:base_bg_shade_2)
+call s:HI('PMenuSel', s:base_bg_shade_2, s:base_fg)
+call s:HI('PMenuSbar', s:none, s:base_fg)
+call s:HI('PMenuThumb', s:none, s:faint)
 
-call s:getHighlight('PMenu', s:none, s:base_bg_shade_2)
-call s:getHighlight('PMenuSel', s:base_bg_shade_2, s:base_fg)
-call s:getHighlight('PMenuSbar', s:none, s:base_fg)
-call s:getHighlight('PMenuThumb', s:none, s:faint)
+call s:HI('MatchParen', s:base_bg, s:color_6)
+" }}}
 
-call s:getHighlight('Constant', s:color_6)
-call s:getHighlight('String', s:color_3)
-call s:getHighlight('Identifier', s:color_1)
-call s:getHighlight('Statement', s:color_1)
-call s:getHighlight('Operator', s:color_4)
-call s:getHighlight('Exception', s:color_1)
-call s:getHighlight('PreProc', s:color_2)
-call s:getHighlight('Type', s:color_5)
-call s:getHighlight('StorageClass', s:color_5)
-call s:getHighlight('Todo', s:base_bg, s:warning)
+" Generic syntax {{{
+call s:HI('Comment', s:comment, s:none)
 
-call s:getHighlight('MatchParen', s:base_bg, s:color_6)
-"}}}
+call s:HI('Constant', s:color_6)    " Any constant
+call s:HI('String', s:color_3)      " A string constant: 'this is a string'
+call s:HI('Character', s:color_2)   " A character constant: 'c', '\n'
+call s:HI('Number', s:color_4)      " A number constant: 234, 0xff
+call s:HI('Boolean', s:color_6)     " A boolean constant: TRUE, false
+call s:HI('Float', s:color_5)       " A floating point constant: 2.3e10
+
+call s:HI('Identifier', s:color_2)  " any variable name
+call s:HI('Function', s:color_5)    " function name (also: methods for classes)
+
+call s:HI('Statement', s:color_1)   " any statement
+call s:HI('Conditional', s:color_1) " if, then, else, endif, switch, etc.
+call s:HI('Repeat', s:color_1)      " for, do, while, etc.
+call s:HI('Label', s:color_1)       " case, default, etc.
+call s:HI('Operator', s:base_fg)    " 'sizeof', '+', '*', etc.
+call s:HI('Keyword', s:color_1)     " Any other keyword
+call s:HI('Exception', s:color_1)   " try, catch, throw
+
+call s:HI('PreProc', s:color_5)     " Generic Preprocessor
+call s:HI('Include', s:color_5)     " Preprocessor #include
+call s:HI('Define', s:color_5)      " Preprocessor #define
+call s:HI('Macro', s:color_5)       " Same as Define
+call s:HI('PreCondit', s:color_5)   " Preprocessor #if, #else, #endif, etc.
+
+call s:HI('Type', s:color_1)         " int, long, char, etc.
+call s:HI('StorageClass', s:color_1) " static, register, volatile, etc.
+call s:HI('Structure', s:color_1)    " struct, union, enum, etc.
+call s:HI('Typedef', s:color_1)      " A typedef
+
+call s:HI('Special', s:color_6)        " Any special symbol
+call s:HI('SpecialChar', s:color_6)    " Special character in a constant
+call s:HI('Tag', s:color_1)            " you can use CTRL-] on this
+call s:HI('Delimiter', s:color_6)      " character that needs attention
+call s:HI('SpecialComment', s:color_6) " Special things inside a comment
+call s:HI('Debug', s:color_6)          " Debugging statements
+
+" Text that stands out, HTML links
+call s:HI('Underlined', s:color_6, s:none, [get(s:attrs, 'u'), get(s:attrs, 'u')])
+
+call s:HI('Ignore', s:hidden)
+
+" Any erroneous construct
+if has('gui_running')
+  call s:HI('Error', s:none, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:danger[0])
+else
+  call s:HI('Error', s:danger, s:base_bg, [get(s:attrs, 'uc'), get(s:attrs, 'u')], s:danger[0])
+endif
+
+" Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+call s:HI('Todo', s:base_bg, s:color_6)
+" }}}
 
 " HTML {{{
-call s:getHighlight('htmlTag', s:color_1)
+call s:HI('htmlTag', s:color_1)
 highlight link htmlEndTag htmlTag
-call s:getHighlight('htmlArg', s:color_2)
-call s:getHighlight('htmlString', s:color_3)
+call s:HI('htmlArg', s:color_2)
+call s:HI('htmlString', s:color_3)
 
-call s:getHighlight('htmlH1', s:base_fg, s:none, ['bold', 'bold'])
+call s:HI('htmlTitle', s:color_6, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+call s:HI('htmlH1', s:base_fg, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
 highlight link htmlH2 htmlH1
 highlight link htmlH3 htmlH1
 highlight link htmlH4 htmlH1
@@ -151,115 +208,79 @@ highlight link htmlH5 htmlH1
 highlight link htmlH6 htmlH1
 highlight link htmlBold htmlH1
 
-call s:getHighlight('htmlItalic', s:base_fg, s:none, ['italic', 'italic'])
-call s:getHighlight('htmlLink', s:base_fg, s:none, ['underline', 'underline'])
-"}}}
+call s:HI('htmlItalic', s:base_fg, s:none, [get(s:attrs, 'i'), get(s:attrs, 'i')])
+call s:HI('htmlLink', s:color_6, s:none, [get(s:attrs, 'u'), get(s:attrs, 'u')])
+call s:HI('htmlUnderline', s:base_fg, s:none, [get(s:attrs, 'u'), get(s:attrs, 'u')])
+call s:HI('htmlBoldUnderline', s:base_fg, s:none, [get(s:attrs, 'bu'), get(s:attrs, 'bu')])
+call s:HI('htmlBoldUnderlineItalic', s:base_fg, s:none, [get(s:attrs, 'bui'), get(s:attrs, 'bui')])
+call s:HI('htmlUnderlineItalic', s:base_fg, s:none, [get(s:attrs, 'ui'), get(s:attrs, 'ui')])
+" }}}
 
-" javaScript {{{
-call s:getHighlight('jsNumber', s:color_4)
-call s:getHighlight('jsString', s:color_3)
-call s:getHighlight('jsBooleanTrue', s:success)
-call s:getHighlight('jsBooleanFalse', s:danger)
-highlight link jsNull jsBooleanFalse
-highlight link jsUndefined jsBooleanFalse
-call s:getHighlight('jsRegexpString', s:color_5)
-call s:getHighlight('jsSpecial', s:color_6)
+" JSX {{{
+highlight link jsxTagName htmlTag
+highlight link jsxComponentName htmlTag
+highlight link jsxPunct htmlTag
+highlight link jsxAttrib htmlArg
 
-call s:getHighlight('jsComment', s:comment)
-call s:getHighlight('jsStorageClass', s:color_1)
-call s:getHighlight('jsObjectKey', s:color_2)
-call s:getHighlight('jsObjectProp', s:color_2)
-call s:getHighlight('jsOperatorKeyword', s:color_6)
-
-call s:getHighlight('jsConditional', s:color_1)
-call s:getHighlight('jsVariableDef', s:color_2)
-call s:getHighlight('jsFunction', s:color_1)
-call s:getHighlight('jsReturn', s:color_6)
-call s:getHighlight('jsFuncName', s:color_5)
-call s:getHighlight('jsFuncCall', s:color_5)
-call s:getHighlight('jsThis', s:color_6)
-call s:getHighlight('jsGlobalObjects', s:color_6)
-call s:getHighlight('jsStatement', s:color_6)
-
-call s:getHighlight('jsClassKeyword', s:color_1)
-call s:getHighlight('jsClassDefinition', s:color_5)
-call s:getHighlight('jsClassFuncName', s:color_5)
-
-call s:getHighlight('jsOperator', s:base_fg)
-highlight link jsBraces jsOperator
-highlight link jsFuncBraces jsOperator
-highlight link jsObjectBraces jsOperator
-highlight link jsIfElseBraces jsOperator
-highlight link jsSwitchBraces jsOperator
-highlight link jsTemplateBraces jsOperator
-highlight link jsDestructuringBraces jsOperator
-highlight link jsRepeatBraces jsOperator
-highlight link jsModuleBraces jsOperator
-highlight link jsClassBraces jsOperator
-highlight link jsParens jsOperator
-highlight link jsFuncParens jsOperator
-highlight link jsBrackets jsOperator
-highlight link jsNoise jsOperator
-highlight link jsExtendsKeyword jsOperator
-highlight link jsArrowFunction jsOperator
-
-call s:getHighlight('jsImport', s:color_1)
-call s:getHighlight('jsFrom', s:color_5)
-call s:getHighlight('jsModuleAs', s:color_5)
-call s:getHighlight('jsModuleKeyword', s:color_6)
-call s:getHighlight('jsModuleAsterisk', s:color_6)
-call s:getHighlight('jsExport', s:color_1)
-call s:getHighlight('jsExportDefault', s:color_2)
-"}}}
+call s:HI('jsxBraces', s:base_fg)
+" }}}
 
 " CSS {{{
-call s:getHighlight('cssIdentifier', s:color_1)
+call s:HI('cssIdentifier', s:color_2)
 highlight link cssClassName cssIdentifier
-highlight link cssTagName cssIdentifier
 
-call s:getHighlight('cssBraces', s:base_fg)
-highlight link cssSelectorOp cssBraces
-highlight link cssSelectorOp2 cssBraces
-highlight link cssNoise cssBraces
+call s:HI('cssBraces', s:base_fg)
+highlight link cssClassNameDot cssBraces
 highlight link cssAttrComma cssBraces
 
-call s:getHighlight('cssDefinition', s:color_2)
-call s:getHighlight('cssValueNumber', s:color_5)
-call s:getHighlight('cssValueLength', s:color_6)
-highlight link cssUnitDecorators cssValueLength
-call s:getHighlight('cssPseudoClass', s:color_6)
-call s:getHighlight('cssAttributeSelector', s:color_6)
-call s:getHighlight('cssFunctionName', s:color_5)
-call s:getHighlight('cssTextAttr', s:color_3)
-highlight link cssCommonAttr cssTextAttr
-highlight link cssFlexibleBoxAttr cssTextAttr
-highlight link cssUIAttr cssTextAttr
-highlight link cssCascadeProp cssTextAttr
-highlight link cssBorderAttr cssTextAttr
-highlight link cssBoxAttr cssTextAttr
-highlight link cssPositioningAttr cssTextAttr
-highlight link cssTableAttr cssTextAttr
-highlight link cssFontAttr cssTextAttr
-"}}}
+call s:HI('cssAttributeSelector', s:color_6)
+highlight link cssPseudoClassId cssAttributeSelector
+highlight link cssPseudoClassFn cssAttributeSelector
+
+call s:HI('cssValueNumber', s:color_3)
+highlight link cssValueLength cssValueNumber
+highlight link cssPositioningAttr cssValueNumber
+highlight link cssCommonAttr cssValueNumber
+highlight link cssFlexibleBoxAttr cssValueNumber
+highlight link cssBorderAttr cssValueNumber
+highlight link cssColor cssValueNumber
+highlight link cssBoxAttr cssValueNumber
+highlight link cssTableAttr cssValueNumber
+highlight link cssUIAttr cssValueNumber
+highlight link cssTextAttr cssValueNumber
+highlight link cssFontAttr cssValueNumber
+highlight link cssMultiColumnAttr cssValueNumber
+
+call s:HI('cssBorderProp', s:color_1)
+" }}}
 
 " SCSS {{{
-call s:getHighlight('scssSelectorName', s:color_1)
-highlight link scssSelectorChar scssSelectorName
-highlight link scssAmpersand scssSelectorName
-highlight link scssImport scssSelectorName
+call s:HI('scssVariable', s:color_6)
+" }}}
 
-call s:getHighlight('scssFunctionName', s:color_6)
-call s:getHighlight('scssSemiColon', s:base_fg)
-"}}}
+" GitGutter {{{
+call s:HI('GitGutterAdd', s:success)
+call s:HI('GitGutterDelete', s:danger)
+call s:HI('GitGutterChange', s:warning)
+call s:HI('GitGutterChangeDelete', s:danger)
+" }}}
 
-" VIM {{{
-call s:getHighlight('vimUserFunc', s:color_5)
-highlight link vimFunction vimUserFunc
-highlight link vimFunc vimUserFunc
-highlight link vimFuncName vimUserFunc
-highlight link vimFuncSID vimUserFunc
+" Fugitive {{{
+call s:HI('diffAdded', s:success)
+call s:HI('diffRemoved', s:danger)
+" }}}
 
-call s:getHighlight('vimOper', s:base_fg)
-highlight link vimOperParen vimOper
-highlight link vimParenSep vimOper
-"}}}
+" javaScript {{{
+call s:HI('jsRegexpString', s:color_5)
+call s:HI('jsSpecial', s:color_6)
+call s:HI('jsOperatorKeyword', s:color_6)
+
+call s:HI('jsObjectKey', s:color_2)
+highlight link jsObjectProp jsObjectKey
+highlight link jsVariableDef jsObjectKey
+highlight link jsDestructuringPropertyValue jsObjectKey
+highlight link jsDestructuringBlock jsObjectKey
+
+call s:HI('jsModuleKeyword', s:color_1)
+highlight link jsModuleAsterisk jsModuleKeyword
+" }}}
