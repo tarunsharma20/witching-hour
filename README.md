@@ -1,6 +1,6 @@
 ## Screenshots
 
-### HTML :
+### HTML/JSX :
 ![Base16 Vim](https://raw.github.com/tarunsharma20/witching-hour/master/screenshots/html.png)
 
 ### javaScript :
