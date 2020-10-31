@@ -285,3 +285,23 @@ call s:HI('jsModuleKeyword', s:color_1)
 highlight link jsModuleAsterisk jsModuleKeyword
 " }}}
 
+" Terminal {{{
+let g:terminal_color_foreground = "#c0c0c0"
+let g:terminal_color_background = "#011627"
+let g:terminal_color_0 = "#011627"
+let g:terminal_color_8 = "#011627"
+let g:terminal_color_1 = "#ff5f5f"
+let g:terminal_color_9 = "#ff5f5f"
+let g:terminal_color_2 = "#00af00"
+let g:terminal_color_10 = "#00af00"
+let g:terminal_color_3 = "#ffaf00"
+let g:terminal_color_11 = "#ffaf00"
+let g:terminal_color_4 = "#00afaf"
+let g:terminal_color_12 = "#00afaf"
+let g:terminal_color_5 = "#ff00ff"
+let g:terminal_color_13 = "#ff00ff"
+let g:terminal_color_6 = "#8787ff"
+let g:terminal_color_14 = "#8787ff"
+let g:terminal_color_7 = "#c0c0c0"
+let g:terminal_color_15 = "#c0c0c0"
+" }}}
