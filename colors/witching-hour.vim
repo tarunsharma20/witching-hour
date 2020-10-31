@@ -21,25 +21,25 @@ let colors_name = "witching-hour"
 let s:none            = ['NONE', 'NONE']
 
 let s:base_bg         = ['#02111d', '0']
-let s:base_fg         = ['#cccccc', '188']
+let s:base_fg         = ['#c0c0c0', '7']
 
-let s:base_bg_shade_1 = ['#112630', '17']
-let s:base_bg_shade_2 = ['#0d2a41', '17']
+let s:base_bg_shade_1 = ['#112630', '233']
+let s:base_bg_shade_2 = ['#0d2a41', '235']
 
-let s:hidden          = ['#444444', '59']
-let s:comment         = ['#555555', '59']
-let s:faint           = ['#777777', '102']
+let s:hidden          = ['#444444', '238']
+let s:comment         = ['#585858', '240']
+let s:faint           = ['#767676', '243']
 
-let s:success         = ['#16c347', '41']
-let s:warning         = ['#ffa822', '214']
-let s:danger          = ['#ff6150', '203']
+let s:success         = ['#00af00', '34']
+let s:warning         = ['#ffaf00', '214']
+let s:danger          = ['#ff5f5f', '203']
 
-let s:color_1         = ['#ad7eff', '141']
-let s:color_2         = ['#85AF13', '106']
-let s:color_3         = ['#19B3C4', '38']
-let s:color_4         = ['#c7d100', '184']
-let s:color_5         = ['#ff51f6', '207']
-let s:color_6         = ['#ffa822', '214']
+let s:color_1         = ['#8787ff', '105']
+let s:color_2         = ['#87d75f', '113']
+let s:color_3         = ['#00afaf', '37']
+let s:color_4         = ['#ffd700', '220']
+let s:color_5         = ['#ff00ff', '201']
+let s:color_6         = ['#d78700', '172']
 " }}}
 
 let s:attrs = {
@@ -284,3 +284,4 @@ highlight link jsDestructuringBlock jsObjectKey
 call s:HI('jsModuleKeyword', s:color_1)
 highlight link jsModuleAsterisk jsModuleKeyword
 " }}}
+
