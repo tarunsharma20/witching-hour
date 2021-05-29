@@ -285,6 +285,19 @@ call s:HI('jsModuleKeyword', s:color_1)
 highlight link jsModuleAsterisk jsModuleKeyword
 " }}}
 
+" vimwiki {{{
+call s:HI('VimwikiHeader1', s:color_1, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+highlight link VimwikiHeader2 VimwikiHeader1
+highlight link VimwikiHeader3 VimwikiHeader1
+highlight link VimwikiHeader4 VimwikiHeader1
+highlight link VimwikiHeader5 VimwikiHeader1
+highlight link VimwikiHeader6 VimwikiHeader1
+
+call s:HI('VimwikiCellSeparator', s:color_3, s:none)
+call s:HI('VimwikiLink', s:color_2, s:none, [get(s:attrs, 'u'), get(s:attrs, 'u')])
+call s:HI('VimwikiCode', s:color_3, s:none)
+" }}}
+
 " Terminal {{{
 let g:terminal_color_foreground = "#c0c0c0"
 let g:terminal_color_background = "#011627"
