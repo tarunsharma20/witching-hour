@@ -298,6 +298,22 @@ call s:HI('VimwikiLink', s:color_2, s:none, [get(s:attrs, 'u'), get(s:attrs, 'u'
 call s:HI('VimwikiCode', s:color_3, s:none)
 " }}}
 
+" vim-lsp {{{
+call s:HI('LspActionText', s:warning)
+call s:HI('LspErrorText', s:danger)
+highlight link LspHintText LspActionText
+highlight link LspInformationText LspActionText
+highlight link LspWarningText LspActionText
+
+call s:HI('LspErrorVirtualText', s:hidden, s:base_bg)
+highlight link LspHintVirtualText LspErrorVirtualText
+highlight link LspInformationVirtualText LspErrorVirtualText
+highlight link LspWarningVirtualText LspErrorVirtualText
+
+call s:HI('lspReference', s:base_bg, s:color_3)
+highlight link LspUnknownScope LspErrorVirtualText
+" }}}
+
 " Terminal {{{
 let g:terminal_color_foreground = "#c0c0c0"
 let g:terminal_color_background = "#011627"
