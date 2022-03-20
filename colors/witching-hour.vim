@@ -11,7 +11,7 @@ set background=dark
 highlight clear
 
 if exists("syntax_on")
-   syntax reset
+  syntax reset
 endif
 
 let colors_name = "witching-hour"
@@ -293,6 +293,7 @@ highlight link VimwikiHeader4 VimwikiHeader1
 highlight link VimwikiHeader5 VimwikiHeader1
 highlight link VimwikiHeader6 VimwikiHeader1
 
+call s:HI('VimwikiListTodo', s:color_3, s:none)
 call s:HI('VimwikiCellSeparator', s:color_3, s:none)
 call s:HI('VimwikiLink', s:color_2, s:none, [get(s:attrs, 'u'), get(s:attrs, 'u')])
 call s:HI('VimwikiCode', s:color_3, s:none)
@@ -310,8 +311,85 @@ highlight link LspHintVirtualText LspErrorVirtualText
 highlight link LspInformationVirtualText LspErrorVirtualText
 highlight link LspWarningVirtualText LspErrorVirtualText
 
-call s:HI('lspReference', s:base_bg, s:color_3)
+call s:HI('lspReference', s:color_1, s:base_bg, [get(s:attrs, 'r'), get(s:attrs, 'r')])
 highlight link LspUnknownScope LspErrorVirtualText
+" }}}
+
+" barbar.lsp {{{
+call s:HI('BufferCurrent', s:base_fg, s:base_bg)
+highlight link BufferCurrentIcon BufferCurrent
+call s:HI('BufferCurrentIndex', s:color_1, s:base_bg)
+highlight link BufferCurrentSign BufferCurrentIndex
+call s:HI('BufferCurrentMod', s:warning, s:base_bg)
+
+call s:HI('BufferInactive', s:base_fg, s:comment)
+highlight link BufferInactiveIcon BufferInactive
+call s:HI('BufferInactiveIndex', s:base_fg, s:comment)
+call s:HI('BufferInactiveMod', s:color_4, s:comment)
+call s:HI('BufferInactiveSign', s:hidden, s:comment)
+
+call s:HI('BufferVisible', s:base_fg, s:hidden)
+highlight link BufferInactiveIcon BufferVisible
+call s:HI('BufferVisibleIndex', s:base_fg, s:hidden)
+call s:HI('BufferVisibleMod', s:base_fg, s:hidden)
+call s:HI('BufferVisibleSign', s:hidden, s:hidden)
+" }}}
+
+" nvim-treesitter/nvim-treesitter {{{
+call s:HI('TSStrong', s:none, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+call s:HI('TSEmphasis', s:none, s:none, [get(s:attrs, 'i'), get(s:attrs, 'i')])
+call s:HI('TSUnderline', s:none, s:none, [get(s:attrs, 'u'), get(s:attrs, 'u')])
+call s:HI('TSNote', s:base_bg, s:color_4, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+highlight! link TSWarning WarningMsg
+highlight! link TSDanger ErrorMsg
+highlight! link TSAnnotation TSNote
+highlight! link TSAttribute TSNote
+highlight! link TSBoolean Boolean
+highlight! link TSCharacter Character
+highlight! link TSComment Comment
+highlight! link TSConditional Conditional
+highlight! link TSConstBuiltin Constant
+highlight! link TSConstMacro Macro
+highlight! link TSConstant Constant
+highlight! link TSConstructor Function
+highlight! link TSException Exception
+highlight! link TSField Constant
+highlight! link TSFloat Float
+highlight! link TSFuncBuiltin Function
+highlight! link TSFuncMacro Macro
+highlight! link TSFunction Function
+highlight! link TSInclude Keyword
+highlight! link TSKeyword Keyword
+highlight! link TSKeywordFunction Keyword
+highlight! link TSKeywordOperator Keyword
+highlight! link TSLabel Label
+highlight! link TSMath Operator
+highlight! link TSMethod Function
+highlight! link TSNamespace Identifier
+highlight! link TSNumber Number
+highlight! link TSOperator Operator
+highlight! link TSParameter Constant
+highlight! link TSParameterReference Constant
+highlight! link TSProperty Identifier
+highlight! link TSPunctBracket Constant
+highlight! link TSPunctDelimiter Constant
+highlight! link TSPunctSpecial Special
+highlight! link TSRepeat Repeat
+highlight! link TSStrike Constant
+highlight! link TSString String
+highlight! link TSStringEscape SpecialChar
+highlight! link TSStringRegex jsRegexpString
+highlight! link TSStructure Structure
+highlight! link TSSymbol Constant
+highlight! link TSTag Tag
+highlight! link TSTagAttribute htmlArg
+highlight! link TSTagDelimiter Constant
+highlight! link TSText String
+highlight! link TSType Type
+highlight! link TSTypeBuiltin Typedef
+highlight! link TSURI Constant
+highlight! link TSVariable Identifier
+highlight! link TSVariableBuiltin Identifier
 " }}}
 
 " Terminal {{{
