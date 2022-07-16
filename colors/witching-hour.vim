@@ -177,6 +177,9 @@ call s:HI('Delimiter', s:color_6)      " character that needs attention
 call s:HI('SpecialComment', s:color_6) " Special things inside a comment
 call s:HI('Debug', s:color_6)          " Debugging statements
 
+call s:HI('Conceal', s:none, s:none)
+call s:HI('WinSeparator', s:faint, s:none)
+
 " Text that stands out, HTML links
 call s:HI('Underlined', s:color_6, s:none, [get(s:attrs, 'u'), get(s:attrs, 'u')])
 
