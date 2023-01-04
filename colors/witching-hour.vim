@@ -319,23 +319,23 @@ highlight link LspUnknownScope LspErrorVirtualText
 " }}}
 
 " barbar.lsp {{{
-call s:HI('BufferCurrent', s:base_fg, s:base_bg)
-highlight link BufferCurrentIcon BufferCurrent
-call s:HI('BufferCurrentIndex', s:color_1, s:base_bg)
-highlight link BufferCurrentSign BufferCurrentIndex
-call s:HI('BufferCurrentMod', s:warning, s:base_bg)
+  call s:HI('BufferCurrent', s:base_fg, s:base_bg)
+  highlight link BufferCurrentIcon BufferCurrent
+  call s:HI('BufferCurrentIndex', s:color_1, s:base_bg)
+  highlight link BufferCurrentSign BufferCurrentIndex
+  call s:HI('BufferCurrentMod', s:warning, s:base_bg)
 
-call s:HI('BufferInactive', s:base_fg, s:comment)
-highlight link BufferInactiveIcon BufferInactive
-call s:HI('BufferInactiveIndex', s:base_fg, s:comment)
-call s:HI('BufferInactiveMod', s:color_4, s:comment)
-call s:HI('BufferInactiveSign', s:hidden, s:comment)
+  call s:HI('BufferInactive', s:base_fg, s:comment)
+  highlight link BufferInactiveIcon BufferInactive
+  call s:HI('BufferInactiveIndex', s:base_fg, s:comment)
+  call s:HI('BufferInactiveMod', s:color_4, s:comment)
+  call s:HI('BufferInactiveSign', s:hidden, s:comment)
 
-call s:HI('BufferVisible', s:base_fg, s:hidden)
-highlight link BufferInactiveIcon BufferVisible
-call s:HI('BufferVisibleIndex', s:base_fg, s:hidden)
-call s:HI('BufferVisibleMod', s:base_fg, s:hidden)
-call s:HI('BufferVisibleSign', s:hidden, s:hidden)
+  call s:HI('BufferVisible', s:base_fg, s:hidden)
+  highlight link BufferInactiveIcon BufferVisible
+  call s:HI('BufferVisibleIndex', s:base_fg, s:hidden)
+  call s:HI('BufferVisibleMod', s:base_fg, s:hidden)
+  call s:HI('BufferVisibleSign', s:hidden, s:hidden)
 " }}}
 
 " nvim-treesitter/nvim-treesitter {{{
