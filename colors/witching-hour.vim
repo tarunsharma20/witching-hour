@@ -63,7 +63,7 @@ function! s:HI(name, ...)
   let l:sp = 'NONE'
 
   if (exists("a:4"))
-   let l:sp = a:4
+    let l:sp = a:4
   endif
 
   let l:hl_string = [
@@ -319,23 +319,52 @@ highlight link LspUnknownScope LspErrorVirtualText
 " }}}
 
 " barbar.lsp {{{
-  call s:HI('BufferCurrent', s:base_fg, s:base_bg)
-  highlight link BufferCurrentIcon BufferCurrent
-  call s:HI('BufferCurrentIndex', s:color_1, s:base_bg)
-  highlight link BufferCurrentSign BufferCurrentIndex
-  call s:HI('BufferCurrentMod', s:warning, s:base_bg)
+call s:HI('BufferCurrent', s:base_fg, s:base_bg)
+highlight link BufferCurrentIcon BufferCurrent
+call s:HI('BufferCurrentIndex', s:color_1, s:base_bg)
+highlight link BufferCurrentSign BufferCurrentIndex
+call s:HI('BufferCurrentMod', s:warning, s:base_bg)
 
-  call s:HI('BufferInactive', s:base_fg, s:comment)
-  highlight link BufferInactiveIcon BufferInactive
-  call s:HI('BufferInactiveIndex', s:base_fg, s:comment)
-  call s:HI('BufferInactiveMod', s:color_4, s:comment)
-  call s:HI('BufferInactiveSign', s:hidden, s:comment)
+call s:HI('BufferInactive', s:base_fg, s:comment)
+highlight link BufferInactiveIcon BufferInactive
+call s:HI('BufferInactiveIndex', s:base_fg, s:comment)
+call s:HI('BufferInactiveMod', s:color_4, s:comment)
+call s:HI('BufferInactiveSign', s:hidden, s:comment)
 
-  call s:HI('BufferVisible', s:base_fg, s:hidden)
-  highlight link BufferInactiveIcon BufferVisible
-  call s:HI('BufferVisibleIndex', s:base_fg, s:hidden)
-  call s:HI('BufferVisibleMod', s:base_fg, s:hidden)
-  call s:HI('BufferVisibleSign', s:hidden, s:hidden)
+call s:HI('BufferVisible', s:base_fg, s:hidden)
+highlight link BufferInactiveIcon BufferVisible
+call s:HI('BufferVisibleIndex', s:base_fg, s:hidden)
+call s:HI('BufferVisibleMod', s:base_fg, s:hidden)
+call s:HI('BufferVisibleSign', s:hidden, s:hidden)
+" }}}
+
+" whichkey.lsp {{{
+highlight link WhichKeyFloat Normal
+call s:HI('WhichKeyBorder', s:base_fg, s:base_bg)
+" }}}
+
+" cucumber {{{
+call s:HI('cucumberFeature', s:color_5, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+
+call s:HI('cucumberScenario', s:color_6, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+highlight! link cucumberBackground cucumberScenario
+
+call s:HI('cucumberGiven', s:color_1, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+highlight! link cucumberWhen cucumberGiven
+highlight! link cucumberThen cucumberGiven
+
+call s:HI('cucumberGivenAnd', s:color_2, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+highlight! link cucumberThenAnd cucumberGivenAnd
+highlight! link cucumberWhenAnd cucumberThenAnd
+
+call s:HI('cucumberGivenBut', s:color_4, s:none, [get(s:attrs, 'b'), get(s:attrs, 'b')])
+highlight! link cucumberThenBut cucumberGivenBut
+highlight! link cucumberWhenBut cucumberGivenBut
+
+call s:HI('cucumberGivenTable', s:color_3)
+highlight! link cucumberThenTable cucumberGivenTable
+highlight! link cucumberButTable cucumberGivenTable
+highlight! link cucumberDelimiter cucumberGivenTable
 " }}}
 
 " nvim-treesitter/nvim-treesitter {{{
